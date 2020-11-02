@@ -1,0 +1,38 @@
+{% extends "front_base.html.twig" %}
+{% block title %}
+	{{ 'login.title'|trans({}, 'pages') }}
+{% endblock %}
+{% block body %}
+	<div class="container my-5 py-5 z-depth-1">
+		<section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
+			<div class="row d-flex justify-content-center">
+				<div class="col-md-6">
+					<form class="text-center" method="post">
+						<p class="h4 mb-4">{{ 'login.name'|trans({}, 'form') }}</p>
+						{% if error is not null %}
+							<div class="alert alert-{{error.getMessageData.severity}}" role="alert">{{error.message}}</div>
+						{% endif %}
+						{% for message in app.flashes('success') %}
+							<div class="alert alert-success">{{ message }}</div>
+						{% endfor %}
+						<input type="email" name="email" class="form-control mb-4" placeholder="{{ 'login.input.email.placeholder'|trans({}, 'form') }}" value="{{ last_username }}" required autofocus>
+						<input type="password" name="password" class="form-control mb-4" placeholder="{{ 'login.input.password.placeholder'|trans({}, 'form') }}" required>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						<div class="d-flex justify-content-around">
+							<div>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" id="rememberMe">
+									<label for="rememberMe">{{ 'login.input.remember_me.label'|trans({}, 'form') }}</label>
+								</div>
+							</div>
+							<div>
+								<a href="{{ path('app_register') }}">{{ 'login.links.registration'|trans({}, 'pages') }}</a>
+							</div>
+						</div>
+						<button class="btn btn-info btn-block my-4" type="submit">{{ 'login.input.submit.label'|trans({}, 'form') }}</button>
+					</form>
+				</div>
+			</div>
+		</section>
+	</div>
+{% endblock %}

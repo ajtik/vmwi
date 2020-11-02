@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{{ 'base.title'|trans({}, 'pages')}}	- {% block title %}{% endblock %}</title>
+		<meta name="description" content="{{ 'login.description'|trans({}, 'pages') }}">.
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('front') }}
+		{% endblock %}
+	</head>
+	<body>
+        {% block body %}{% endblock %}
+		{% block javascripts %}
+			{{ encore_entry_script_tags('front') }}
+		{% endblock %}
+	</body>
+</html>

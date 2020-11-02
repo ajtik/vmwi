@@ -1,0 +1,5 @@
+user:
+  unique:
+    email: 'Uživatel s uvedeným emailem již existuje.'
+  password:
+    minLength: 'Heslo musí mít aspoň %min% znaků.'

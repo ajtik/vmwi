@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'users.ssh_key.edit.title'|trans({}, 'pages')}}
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid my-3">
+		<section>
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-list">
+						<div class="p-3">
+							<div class="card-header white d-flex justify-content-between align-items-center py-3">
+								<p class="h5-responsive font-weight-bold mb-0">{{ 'users.ssh_key.edit.title'|trans({}, 'pages')}}</p>
+							</div>
+							<div class="card-body">
+								{{ form_start(sshKeyEditForm) }}
+                                {{ form_widget(sshKeyEditForm.name, {
+                                    'attr': {
+                                        'class': 'form-control mb-4',
+                                        'placeholder': 'sshkey.add.input.name.placeholder'|trans({}, 'form')
+                                    }})
+                                }}
+                                {{ form_widget(sshKeyEditForm.publicKey, {
+                                    'attr': {
+                                        'class': 'form-control mb-4',
+                                        'placeholder': 'sshkey.add.input.publicKey.placeholder'|trans({}, 'form')
+                                    }})
+                                }}
+                                <button type="submit" class="btn btn-info btn-block mb-3">{{ 'sshkey.edit.submit'|trans({}, 'form') }}</button>
+								{{ form_end(sshKeyEditForm) }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+{% endblock %}

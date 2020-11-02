@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ 'virtual_machines.create.title'|trans({}, 'pages')}}
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid my-3">
+		<section>
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-list">
+						<div class="p-3">
+							<div class="card-header white d-flex justify-content-between align-items-center py-3">
+								<p class="h5-responsive font-weight-bold mb-0">{{ 'virtual_machines.create.title'|trans({}, 'pages')}}</p>
+							</div>
+							<div class="card-body">
+								{% for message in app.flashes('danger') %}
+									<div class="alert alert-danger">{{ message }}</div>
+								{% endfor %}
+								{{ form_start(virtualMachineCreateForm, {'attr': {'class' : 'text-center'}}) }}
+								{{ form_widget(virtualMachineCreateForm.name, {
+                                    'attr': {
+                                        'class': 'form-control mb-4',
+                                        'placeholder': 'virtual_machine.create.input.name.placeholder'|trans({}, 'form')
+                                    }
+                                })}}
+								{{ form_widget(virtualMachineCreateForm.size, {
+                                    'attr': {
+                                        'class': 'form-control mb-4'
+                                    }
+                                })}}
+								{{ form_widget(virtualMachineCreateForm.os, {
+                                    'attr': {
+                                        'class': 'form-control mb-4'
+                                    }
+                                })}}
+								{{ form_widget(virtualMachineCreateForm.ssh_key, {
+                                    'attr': {
+                                        'class': 'form-control mb-4'
+                                    }
+                                })}}
+								<button type="submit" class="btn btn-info btn-block my-4">{{ 'virtual_machine.create.input.submit'|trans({}, 'form') }}</button>
+								{{ form_end(virtualMachineCreateForm) }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+{% endblock %}

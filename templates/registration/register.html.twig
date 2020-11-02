@@ -1,0 +1,38 @@
+{% extends 'front_base.html.twig' %}
+{% block title %}{{ 'registration.title'|trans({}, 'pages') }}{% endblock %}
+{% block body %}
+	{% for flashError in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
+
+	<div class="container my-5 py-5 z-depth-1">
+		<section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
+			<div class="row d-flex justify-content-center">
+				<div class="col-md-6">
+					{{ form_start(registrationForm, {'attr': {'class' : 'text-center'}}) }}
+					<p class="h4 mb-4">{{ 'registration.name'|trans({}, 'form') }}</p>
+					{% for message in app.flashes('danger') %}
+					    <div class="alert alert-danger">{{ message }}</div>
+					{% endfor %}
+					{{ form_widget(registrationForm.email, {
+                        'attr': {
+                            'class': 'form-control mb-4',
+                            'placeholder': 'registration.input.email.placeholder'|trans({}, 'form')
+                        }})
+					}}
+					{{ form_widget(registrationForm.password, {
+                        'attr': {
+                            'class': 'form-control mb-4',
+                            'placeholder': 'registration.input.password.placeholder'|trans({}, 'form')
+                        }})
+					}}
+					<button type="submit" class="btn btn-info btn-block my-4">{{ 'registration.input.submit.label'|trans({}, 'form') }}</button>
+					<p>
+						<a href="{{ path('app_login') }}">{{ 'registration.links.back_to_login'|trans({}, 'pages') }}</a>
+					</p>
+					{{ form_end(registrationForm) }}
+				</div>
+			</div>
+		</section>
+	</div>
+{% endblock %}

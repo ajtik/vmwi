@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  webserver:
+    build:
+      context: ./.docker/php-apache/
+    volumes:
+      - ./:/var/www
+    ports:
+      - 80:80
+    networks:
+      - phpdebug
+
+  database:
+    image: mysql:8.0
+    volumes:
+      - ./.docker/mysql/data:/var/lib/mysql
+      - ./.docker/mysql/settings.cnf:/etc/mysql/conf.d/settings.cnf
+    ports:
+      - 3306:3306
+    env_file:
+      - ./.docker/mysql/secrets.env
+
+  adminer:
+    image: adminer:latest
+    ports:
+      - 8080:8080
+    restart: always
+
+networks:
+  phpdebug:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.255.0/30

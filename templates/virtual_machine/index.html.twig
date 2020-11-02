@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'virtual_machines.index.title'|trans({}, 'pages')}}
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid my-3">
+		<section>
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-list">
+						<div class="p-3">
+							<div class="card-header white d-flex justify-content-between align-items-center py-3">
+								<p class="h5-responsive font-weight-bold mb-0">{{ 'virtual_machines.index.title'|trans({}, 'pages')}}</p>
+								<a href="{{ path('app_machines_create') }}">
+									<button class="btn btn-primary btn-md px-3 my-0 mr-0">{{ 'virtual_machines.index.links.create'|trans({}, 'pages')}}</button>
+								</a>
+							</div>
+							<div class="card-body">
+								{% for message in app.flashes('success') %}
+									<div class="alert alert-success">{{ message }}</div>
+								{% endfor %}
+								<table class="table table-hover" style="border-spacing:0;">
+									<thead>
+										<tr>
+											<th scope="col">{{ 'virtual_machines.index.table.th.name'|trans({}, 'pages')}}</th>
+											<th scope="col">{{ 'virtual_machines.index.table.th.system'|trans({}, 'pages')}}</th>
+											<th scope="col">{{ 'virtual_machines.index.table.th.cpu'|trans({}, 'pages')}}</th>
+											<th scope="col">{{ 'virtual_machines.index.table.th.ram'|trans({}, 'pages')}}</th>
+											<th scope="col">{{ 'virtual_machines.index.table.th.disk'|trans({}, 'pages')}}</th>
+											<th scope="col">{{ 'virtual_machines.index.table.th.region'|trans({}, 'pages')}}</th>
+											<th scope="col">{{ 'virtual_machines.index.table.th.ipv4'|trans({}, 'pages')}}</th>
+											<th scope="col">{{ 'virtual_machines.index.table.th.status'|trans({}, 'pages')}}</th>
+											<th scope="col">{{ 'virtual_machines.index.table.th.actions'|trans({}, 'pages')}}</th>
+										</tr>
+									</thead>
+									<tbody style="text-align:center;">
+										{% for machine in machines %}
+											<tr>
+												<td class="border-top-0">{{ machine.name }}</td>
+												<td class="border-top-0">{{ machine.os }}</td>
+												<td class="border-top-0">{{ machine.vcpus }}</td>
+												<td class="border-top-0">{{ machine.ram }}MB</td>
+												<td class="border-top-0">{{ machine.hdd }}GB</td>
+												<td class="border-top-0">{{ machine.region }}</td>
+												<td class="border-top-0">{{ machine.ipV4Address }}</td>
+												<td class="border-top-0">
+													<span class="badge badge-{% if machine.status == "OFFLINE" %}danger{% elseif machine.status == "ONLINE" %}success{% else %}warning{% endif %}">{{ machine.status }}
+													</span>
+												</td>
+												<td class="border-top-0">
+													<a href="{{ path('app_machines_restart', {id: machine.id})}}" title="Restartovat">
+ 														<i class="fas fa-sync-alt" style="font-size:20px;color:orange;"></i>
+													</a>&nbsp;
+													{% if machine.status == "OFFLINE" %}
+														<a href="{{ path('app_machines_start', {id: machine.id})}}" title="Zapnout">
+															<i class="fas fa-power-off" style="color:green;font-size:20px;"></i>
+														</a>&nbsp;
+													{% elseif machine.status == "ONLINE" %}
+														<a href="{{ path('app_machines_stop', {id: machine.id})}}" title="Vypnout">
+															<i class="fas fa-power-off" style="color:red;font-size:20px;"></i>
+														</a>&nbsp;
+													{% endif %}
+													<a href="{{ path('app_machines_delete', {id: machine.id})}}" title="Smazat">
+														<i class="fas fa-trash-alt" style="font-size:20px;"></i>
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+{% endblock %}

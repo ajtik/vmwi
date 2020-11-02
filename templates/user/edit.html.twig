@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'users.edit.title'|trans({}, 'pages')}}
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid my-3">
+		<section>
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-list">
+						<div class="p-3">
+							<div class="card-header white d-flex justify-content-between align-items-center py-3">
+								<p class="h5-responsive font-weight-bold mb-0">{{ 'users.edit.title'|trans({}, 'pages')}} - {{userToEdit.email}}</p>
+							</div>
+							<div class="card-body">
+								{{ form_start(userEditForm) }}
+								<h2>{{ 'users.edit.h2.settings'|trans({}, 'pages')}}</h2>
+								{% for message in app.flashes('danger') %}
+									<div class="alert alert-danger">{{ message }}</div>
+								{% endfor %}
+								{% for message in app.flashes('success') %}
+									<div class="alert alert-success">{{ message }}</div>
+								{% endfor %}
+								{% if is_granted('ROLE_ADMIN') %}
+									<h3>{{ 'users.edit.h3.activation'|trans({}, 'pages')}}</h3>
+									{{ form_widget(userEditForm.isActive, {
+									'attr': {
+										'class': 'form-control mb-4',
+										'placeholder': 'user.edit.input.password.placeholder'|trans({}, 'form')
+									}})
+								}}
+								{% endif %}
+								<h3>{{ 'users.edit.h3.password_change'|trans({}, 'pages')}}</h3>
+								{{ form_widget(userEditForm.password.first, {
+								'attr': {
+										'class': 'form-control mb-4',
+										'placeholder': 'user.edit.input.password.placeholder'|trans({}, 'form')
+									}})
+								}}
+								{{ form_widget(userEditForm.password.second, {
+									'attr': {
+										'class': 'form-control mb-4',
+										'placeholder': 'user.edit.input.passwordRepeat.placeholder'|trans({}, 'form')
+									}})
+								}}
+								<button type="submit" class="btn btn-info btn-block mb-3">{{ 'user.edit.input.submit.label'|trans({}, 'form') }}</button>
+								{{ form_end(userEditForm) }}
+								<h3>{{ 'users.edit.h3.ssh_keys'|trans({}, 'pages')}}</h3>
+								<table class="table table-hover" style="border-spacing:0;">
+									<thead>
+										<th>{{ 'users.edit.table.th.name'|trans({}, 'pages')}}</th>
+										<th>{{ 'users.edit.table.th.actions'|trans({}, 'pages')}}</th>
+									</thead>
+									<tbody style="text-align:center;">
+										{% for sshKey in sshKeys %}
+											<td style="border-top:0;">{{ sshKey.name }}</td>
+											<td style="border-top:0;font-size:16px;">
+												<a href="{{ path('app_users_sshkey_edit', {id: userToEdit.id, keyId: sshKey.id}) }}"<i class="fas fa-edit"></i></a>
+												<a href="{{ path('app_users_sshkey_delete', {id: userToEdit.id, keyId: sshKey.id}) }}"<i class="fas fa-trash-alt"></i></a>
+											</td>
+										{% endfor %}
+									</tbody>
+								</table>
+								<a href="{{ path('app_users_sshkey_add', {id: userToEdit.id}) }}">
+									<button type="submit" class="btn btn-info btn-block mb-3">{{ 'users.edit.button.new_ssh_key'|trans({}, 'pages')}}</button>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+{% endblock %}

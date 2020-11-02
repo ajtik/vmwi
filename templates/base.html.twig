@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{{ 'base.title'|trans({}, 'pages')}}
+			-
+			{% block title %}{% endblock %}
+		</title>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+			<a class="navbar-brand" href="#">VMWI</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#appNav" aria-controls="appNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="appNav">
+				<ul class="navbar-nav mr-auto mt-0">
+					<li class="nav-item {% if app.request.get('_route') == 'app_machines' %}active{% endif %}">
+						<a class="nav-link" href="{{ path('app_machines') }}">
+							<i class="fas fa-hdd"></i>&nbsp;{{ 'base.menu.virtual_machines'|trans({}, 'pages')}}</a>
+					</li>
+					{% if is_granted('ROLE_ADMIN') %}
+						<li class="nav-item {% if app.request.get('_route') == 'app_users' %}active{% endif %}">
+							<a class="nav-link" href="{{ path('app_users') }}">
+								<i class="fas fa-users"></i>&nbsp;{{ 'base.menu.users'|trans({}, 'pages')}}</a>
+						</li>
+					{% endif %}
+				</ul>
+				<ul class="navbar-nav ml-auto nav-flex-icons mt-0">
+					<li class="nav-item {% if app.request.get('_route') == 'app_users_edit' %}active{% endif %}">
+						<a class="nav-link" href="{{ path('app_users_edit', {id: app.user.id}) }}">
+							<i class="fas fa-user-cog"></i>&nbsp;{{ 'base.menu.settings'|trans({}, 'pages')}}
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_logout')  }}">
+							<i class="fas fa-sign-out-alt"></i>&nbsp;{{ 'base.menu.logout'|trans({}, 'pages')}}</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		{% block body %}{% endblock %}
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</body>
+</html>

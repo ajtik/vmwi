@@ -1,0 +1,102 @@
+registration:
+  name: Registrace
+  input:
+    email:
+      placeholder: E-mail
+    password:
+      placeholder: Heslo
+    submit:
+      label: Registrovat
+  validation:
+    password:
+      notBlank: Heslo musí být vyplněno.
+      length:
+        min: Heslo musí mít aspoň %min% znaků
+  success: Uživatel registrován. Vyčtejte na aktivaci účtu administrátorem.
+
+login:
+  name: Přihlášení
+  input:
+    email:
+      placeholder: E-mail
+    password:
+      placeholder: Heslo
+    remember_me:
+      label: Zapamatovat si mě
+    submit:
+      label: Přihlásit
+  error:
+    user_not_found: Uživatel nenalezen
+    user_not_active: Uživatel není aktivní. Kontaktuje administrátora.
+    wrong_password: Špatné heslo. Pro obnovu kontaktujte administrátora.
+
+user:
+  edit:
+    name: Editace uživatele
+    input:
+      password:
+        placeholder: Nové heslo
+      passwordRepeat:
+        placeholder: Nové heslo znovu
+      status:
+        label: Status
+        active: Aktivní
+        inactive: Neaktivní
+      submit:
+        label: Uložit
+    validation:
+      password:
+        not_same: Hesla se neshodují.
+        length:
+          min: Heslo musí mít aspoň %min% znaků.
+    success:
+      message: Heslo bylo úspěšně změněno.
+
+sshkey:
+  add:
+    name: Přidat SSH klíč
+    input:
+      name:
+        placeholder: Název klíče
+      publicKey:
+        placeholder: Veřejný klíč
+      submit: Přidat klíč
+    validation:
+      name:
+        not_blank: Název klíče nesmí být prázdný.
+        length:
+          max: Název klíče musí mít aspoň %min% znaků.
+    success:
+      message: SSH klíč úspěšně přidán.
+    fail:
+      message: SSH klíč nejde přidat, je evidován již k jinému účtu.
+  edit:
+    name: Editovat SSH klíč
+    submit: Uložit
+    success:
+      message: SSH klíč úspěšně editován.
+  delete:
+    success:
+      message: SSH klíč úspěšně odstraněn.
+    fail:
+      message: SSH klíč nemůže být smazán. Je použit u virtuálního stroje.
+  
+virtual_machine:
+  create:
+    input:
+      name: 
+        placeholder: Název stroje
+      submit: Vytvořit
+    success:
+      message: Virtuální stroj byl úspěšně vytvořen.
+    validation:
+      name:
+        notBlank: Jméno stroje nesmí být prázdné.
+        noSpace: Jméno nesmí obsahovat mezeru.
+        length:
+          min: 4
+          max: 255
+          minMessage: Jméno musí být aspoň 4 znaky dlouhé.
+          maxMessage: Jméno může být maximálně 255 znaků dlouhé.
+      sshKey:
+        notBlank: Virtuální stroj musí mít přiřazen SSH klíč.

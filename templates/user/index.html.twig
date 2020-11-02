@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'users.index.title'|trans({}, 'pages')}}
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid my-3">
+		<section>
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-list">
+						<div class="p-3">
+							<div class="card-header white d-flex justify-content-between align-items-center py-3">
+								<p class="h5-responsive font-weight-bold mb-0">{{ 'users.index.title'|trans({}, 'pages')}}</p>
+							</div>
+							<div class="card-body">
+								<table class="table table-hover" style="border-spacing:0;">
+									<thead>
+										<tr>
+											<th scope="col">{{ 'users.index.table.th.id'|trans({}, 'pages')}}</th>
+											<th scope="col">{{ 'users.index.table.th.email'|trans({}, 'pages')}}</th>
+											<th scope="col">{{ 'users.index.table.th.status'|trans({}, 'pages')}}</th>
+											<th scope="col">{{ 'users.index.table.th.actions'|trans({}, 'pages')}}</th>
+										</tr>
+									</thead>
+									<tbody style="text-align:center;">
+										{% for user in users %}
+											<tr>
+												<td class="border-top-0">{{ user.id }}</td>
+												<td class="border-top-0">{{ user.email }}</td>
+												<td class="border-top-0">
+													<span class="badge {% if user.isActive %}badge-success{% else %}badge-danger{% endif %}">
+														{% if user.isActive %}
+															{{ 'users.index.table.active'|trans({}, 'pages')}}
+														{% else %}
+															{{ 'users.index.table.inactive'|trans({}, 'pages')}}
+														{% endif %}
+													</span>
+												</td>
+												<td class="border-top-0">
+													<a href="{{ path('app_users_edit', {id: user.id}) }}">
+														<i class="fas fa-edit" style="font-size:20px;"></i>
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+{% endblock %}

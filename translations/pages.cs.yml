@@ -1,0 +1,79 @@
+base:
+  title: VMWI
+  menu:
+    virtual_machines: Virtuální stroje
+    users: Uživatelé
+    settings: Nastavení
+    logout: Odhlásit se
+
+registration:
+  title: Registrace
+  description: Registrace do webového rozhraní pro správu virtuálních strojů.
+  links:
+    back_to_login: Zpátky na přihlášení
+
+login:
+  title: Přihlášení
+  description: Přihlášení do webového rozhraní pro správu virtuálních strojů.
+  links:
+    forgot_password: Zapomenuté heslo?
+    registration: Registrace
+
+virtual_machines:
+  index:
+    title: Virtuální stroje
+    table:
+      th:
+        name: Název
+        system: Systém
+        region: Region
+        ipv4: IPv4
+        ipv6: IPv6
+        cpu: vCPUs
+        ram: Paměť
+        disk: Disk
+        status: Status
+        actions: Akce
+    links:
+      create: Vytvořit
+  create:
+    title: Vytvořit virtuální stroj
+  restart:
+    success: Restart virtuálního stroje naplánovaný, chvíli počkejte.
+  start:
+    success: Start stroje naplánovaný, chvíli počkejte.
+  stop:
+    success: Stop stroje naplánovaný, chvíli počkejte.
+  delete:
+    success: Stroj smazán.
+
+users:
+  index:
+    title: Uživatelé
+    table:
+      th:
+        id: ID
+        email: E-mail
+        status: Status
+        actions: Akce
+      active: Aktivní
+      inactive: Neaktivní
+  edit:
+    title: Editovat uživatele
+    h2:
+      settings: Nastavení
+    h3:
+      activation: Aktivace
+      password_change: Změna hesla
+      ssh_keys: SSH klíče
+    table:
+      th:
+        name: Jméno
+        actions: Akce
+    button:
+      new_ssh_key: Přidat SSH klíč
+  ssh_key:
+    add:
+      title: Přidat SSH klíč
+    edit:
+      title: Editovat SSH klíč
